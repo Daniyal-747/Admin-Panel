@@ -1,11 +1,14 @@
 <?php
-  include("header.php");
-  include("connection.php");
+include("header.php");
+include("connection.php");
 
+$Id = $_GET['id'];
+$sql = "select * from role where id = $Id";
+$result = mysqli_query($conn,$sql);
 
-  $sql = "select * from role";
-  $result = mysqli_query($conn, $sql);
+$rows = mysqli_fetch_assoc($result);
 ?>
+
 
 <div class="content-body">
     <div class="container-fluid">
@@ -23,25 +26,31 @@
                 </ol>
             </div>
         </div>
-<div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Role Form</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="basic-form">
-                            <form method="POST">
 
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label>Role name</label>
-                                        <input type="text" name="role" class="form-control" placeholder="Enter Your Role Name.">
-                                    </div>
-                                   
-                                </div>
-                                <button type="submit" name="submit" class="btn btn-primary">Add Role</button>
-                            </form>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Role Update</h4>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                    <form method="POST">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>Role Name</label>
+                                <input type="text" name="role" value="<?php echo $rows['role_name'] ?>" class="form-control" placeholder="Enter your Role Name">
+                            </div>
+
+                            <button type="submit" name="update" class="btn btn-primary">Update Role</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                </div>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php
+include("footer.php");
+?>
